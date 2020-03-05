@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [ -z "$1" ]; then
+    echo '画像を指定してください！'
+    exit 1
+fi
+
+image_file=$1
 is_retina=true
 $is_retina && tile_size=512 || tile_size=256
 echo $tile_size
@@ -31,7 +37,7 @@ do
   map_size=$(($tile_size * 2 ** $zoom_level ))
 
   # リサイズ
-  gifsicle --resize-fit-width ${map_size} -i 200109_new-map.gif > ./zoom${zoom_level}/zoom${zoom_level}.gif
+  gifsicle --resize-fit-width ${map_size} -i ${image_file} > ./zoom${zoom_level}/zoom${zoom_level}.gif
 
   # 最大行数
   max_row=$((2 ** $zoom_level))
