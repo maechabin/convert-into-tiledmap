@@ -9,11 +9,9 @@ fi
 
 image_file=$1
 file $image_file
-# image_width=`file "$image_file" | cut -d " " -f7`
-# image_height=`file "$image_file" | cut -d " " -f9`
-
-image_width=8192
-image_height=6018
+# 画像ファイルの縦、横サイズ
+image_width=`convert $image_file[0] -format '%h' info:`
+image_height=`convert $image_file[0] -format '%w' info:`
 
 is_retina=true
 $is_retina && tile_size=512 || tile_size=256
