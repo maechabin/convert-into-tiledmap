@@ -3,8 +3,8 @@
 rm -rf ./zoom*
 
 if [ -z "$1" ]; then
-    echo '画像を指定してください！'
-    exit 1
+  echo '画像を指定してください！'
+  exit 1
 fi
 
 image_file=$1
