@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rm -rf ./zoom*
+
 if [ -z "$1" ]; then
     echo '画像を指定してください！'
     exit 1
