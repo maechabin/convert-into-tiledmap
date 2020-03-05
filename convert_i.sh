@@ -1,6 +1,6 @@
 #!/bin/sh
 
-rm -rf ./zoom*
+rm -rf ./tiles
 
 if [ -z "$1" ]; then
   echo '画像を指定してください！'
@@ -32,17 +32,17 @@ zoom_level=0
 while [ "$zoom_level" -le "$max_zoom_level" ]
 do
   # ディレクトリを作る
-  mkdir ./zoom${zoom_level}
+  mkdir ./tiles
 
   # マップサイズを取得する
   map_size=$(($tile_size * 2 ** $zoom_level ))
 
   # リサイズ
-  convert -resize ${map_size}x${map_size} ${image_file} ./zoom${zoom_level}/zoom${zoom_level}.${image_extension}
+  convert -resize ${map_size}x${map_size}  -quality 100 ${image_file} ./tiles/zoom${zoom_level}.${image_extension}
 
   # タイル化
-  convert ./zoom${zoom_level}/zoom${zoom_level}.${image_extension} -crop ${tile_size}x${tile_size} +gravity -set filename:tile \
-  ./zoom${zoom_level}/${zoom_level}_%[fx:page.x/${tile_size}]_%[fx:page.y/${tile_size}] %[filename:tile].${image_extension}
+  convert ./tiles/zoom${zoom_level}.${image_extension} -crop ${tile_size}x${tile_size} -quality 95 +gravity -set filename:tile \
+  ./tiles/${zoom_level}_%[fx:page.x/${tile_size}]_%[fx:page.y/${tile_size}] %[filename:tile].${image_extension}
 
   zoom_level=$(($zoom_level + 1))
 done

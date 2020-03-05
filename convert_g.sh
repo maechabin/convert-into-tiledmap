@@ -1,6 +1,6 @@
 #!/bin/sh
 
-rm -rf ./zoom*
+rm -rf ./tiles
 
 if [ -z "$1" ]; then
   echo '画像を指定してください！'
@@ -29,13 +29,13 @@ zoom_level=0
 while [ "$zoom_level" -le "$max_zoom_level" ]
 do
   # ディレクトリを作る
-  mkdir ./zoom${zoom_level}
+  mkdir ./tiles
 
   # マップサイズを取得する
   map_size=$(($tile_size * 2 ** $zoom_level ))
 
   # リサイズ
-  gifsicle --resize-fit-width ${map_size} -i ${image_file} > ./zoom${zoom_level}/zoom${zoom_level}.gif
+  gifsicle --resize-fit-width ${map_size} -i ${image_file} > ./tiles/zoom${zoom_level}.gif
 
   # 最大行数
   max_row=$((2 ** $zoom_level))
@@ -58,7 +58,7 @@ do
       y1=$(($y * $tile_size))
       x2=$(($x1 + $tile_size))
       y2=$(($y1 + $tile_size))
-      gifsicle --crop ${x1},${y1}-${x2},${y2} --output ./zoom${zoom_level}/${zoom_level}_${x}_${y}.gif ./zoom${zoom_level}/zoom${zoom_level}.gif
+      gifsicle --crop ${x1},${y1}-${x2},${y2} --output ./tiles/${zoom_level}_${x}_${y}.gif ./tiles/zoom${zoom_level}.gif
 
       column=$(($column + 1))
     done
