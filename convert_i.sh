@@ -14,7 +14,7 @@ image_extension=`echo basename $image_file |  sed 's/^.*\.\([^\.]*\)$/\1/'`
 image_width=`convert $image_file[0] -format '%h' info:`
 image_height=`convert $image_file[0] -format '%w' info:`
 
-is_retina=true
+is_retina=false
 $is_retina && tile_size=512 || tile_size=256
 
 # 縦と横で大きい方のサイズを image_size に代入

@@ -11,7 +11,7 @@ image_file=$1
 image_width=`file "$image_file" | cut -d " " -f7`
 image_height=`file "$image_file" | cut -d " " -f9`
 
-is_retina=true
+is_retina=false
 $is_retina && tile_size=512 || tile_size=256
 
 # 縦と横で大きい方のサイズを image_size に代入
