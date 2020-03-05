@@ -13,20 +13,16 @@ image_height=`file "$image_file" | cut -d " " -f9`
 
 is_retina=true
 $is_retina && tile_size=512 || tile_size=256
-echo $tile_size
 
 # 縦と横で大きい方のサイズを image_size に代入
 [ $image_width -gt $image_height ] && image_size=$image_width || image_size=$image_height
-echo $image_size
 
+# 画像を縦横大きい方で最大何等分できるか
 tile_number=$(($image_size / $tile_size))
-
-echo $tile_number
 
 # 最大ズームレベル値を取得する
 log=`echo "l($((tile_number)))/l(2)" | bc -l`
 max_zoom_level=`echo ${log} | awk '{printf("%d", $1 + 0.9)}'`
-echo $max_zoom_level
 
 # ズームレベル単位でタイル画像を生成
 zoom_level=0
@@ -72,3 +68,5 @@ do
 
   zoom_level=$(($zoom_level + 1))
 done
+
+exit 1
