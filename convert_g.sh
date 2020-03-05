@@ -68,5 +68,3 @@ do
 
   zoom_level=$(($zoom_level + 1))
 done
-
-exit 1
