@@ -1,6 +1,7 @@
 #!/bin/sh
 
 rm -rf ./tiles
+mkdir ./tiles
 
 if [ -z "$1" ]; then
   echo '画像を指定してください！'
@@ -28,9 +29,6 @@ max_zoom_level=`echo ${log} | awk '{printf("%d", $1 + 0.9)}'`
 zoom_level=0
 while [ "$zoom_level" -le "$max_zoom_level" ]
 do
-  # ディレクトリを作る
-  mkdir ./tiles
-
   # マップサイズを取得する
   map_size=$(($tile_size * 2 ** $zoom_level ))
 
