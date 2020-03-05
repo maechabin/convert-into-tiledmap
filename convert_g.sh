@@ -6,12 +6,12 @@ if [ -z "$1" ]; then
 fi
 
 image_file=$1
+image_width=`file "$image_file" | cut -d " " -f7`
+image_height=`file "$image_file" | cut -d " " -f9`
+
 is_retina=true
 $is_retina && tile_size=512 || tile_size=256
 echo $tile_size
-
-image_width=8000
-image_height=6000
 
 # 縦と横で大きい方のサイズを image_size に代入
 [ $image_width -gt $image_height ] && image_size=$image_width || image_size=$image_height
