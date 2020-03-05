@@ -8,7 +8,8 @@ if [ -z "$1" ]; then
 fi
 
 image_file=$1
-file $image_file
+# 画像ファイルの拡張子
+image_extension=`echo basename $image_file |  sed 's/^.*\.\([^\.]*\)$/\1/'`
 # 画像ファイルの縦、横サイズ
 image_width=`convert $image_file[0] -format '%h' info:`
 image_height=`convert $image_file[0] -format '%w' info:`
@@ -37,11 +38,11 @@ do
   map_size=$(($tile_size * 2 ** $zoom_level ))
 
   # リサイズ
-  convert -resize ${map_size}x${map_size} ${image_file} ./zoom${zoom_level}/zoom${zoom_level}.png
+  convert -resize ${map_size}x${map_size} ${image_file} ./zoom${zoom_level}/zoom${zoom_level}.${image_extension}
 
   # タイル化
-  convert ./zoom${zoom_level}/zoom${zoom_level}.png -crop ${tile_size}x${tile_size} +gravity -set filename:tile \
-  ./zoom${zoom_level}/${zoom_level}_%[fx:page.x/${tile_size}]_%[fx:page.y/${tile_size}] %[filename:tile].png
+  convert ./zoom${zoom_level}/zoom${zoom_level}.${image_extension} -crop ${tile_size}x${tile_size} +gravity -set filename:tile \
+  ./zoom${zoom_level}/${zoom_level}_%[fx:page.x/${tile_size}]_%[fx:page.y/${tile_size}] %[filename:tile].${image_extension}
 
   zoom_level=$(($zoom_level + 1))
 done
