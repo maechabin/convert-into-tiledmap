@@ -34,7 +34,7 @@ do
   map_size=$(($TILE_SIZE * 2 ** $zoom_level ))
 
   # リサイズ
-  gifsicle --resize-fit-width ${map_size} -i ${image_file} > ./tiles/zoom${zoom_level}.gif
+  gifsicle --resize-fit-width ${map_size} --colors 256 -i ${image_file} > ./tiles/zoom${zoom_level}.gif
 
   # 最大行数
   max_row=$((2 ** $zoom_level))
