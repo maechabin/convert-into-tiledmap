@@ -65,5 +65,6 @@ do
     row=$(($row + 1))
   done
 
+  rm ./tiles/zoom${zoom_level}.gif
   zoom_level=$(($zoom_level + 1))
 done
