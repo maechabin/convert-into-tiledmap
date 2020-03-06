@@ -9,8 +9,9 @@ if [ -z "$1" ]; then
 fi
 
 image_file=$1
-image_width=`file "$image_file" | cut -d " " -f7`
-image_height=`file "$image_file" | cut -d " " -f9`
+# 画像ファイルの縦、横サイズ
+[ $2 ] && image_width=$2 || image_width=`file "$image_file" | cut -d " " -f7`
+[ $3 ] && image_height=$3 || image_height=`file "$image_file" | cut -d " " -f9`
 
 is_retina=false
 $is_retina && readonly TILE_SIZE=512 || readonly TILE_SIZE=256

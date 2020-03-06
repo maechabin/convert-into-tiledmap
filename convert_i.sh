@@ -12,8 +12,8 @@ image_file=$1
 # 画像ファイルの拡張子
 image_extension=`echo basename $image_file |  sed 's/^.*\.\([^\.]*\)$/\1/'`
 # 画像ファイルの縦、横サイズ
-image_width=`convert $image_file[0] -format '%h' info:`
-image_height=`convert $image_file[0] -format '%w' info:`
+[ $2 ] && image_width=$2 || image_width=`convert $image_file[0] -format '%h' info:`
+[ $3 ] && image_height=$3 || image_height=`convert $image_file[0] -format '%w' info:`
 
 is_retina=false
 $is_retina && readonly TILE_SIZE=512 || readonly TILE_SIZE=256
