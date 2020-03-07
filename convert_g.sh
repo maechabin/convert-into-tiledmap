@@ -57,7 +57,8 @@ do
       y1=$(($y * $TILE_SIZE))
       x2=$(($x1 + $TILE_SIZE))
       y2=$(($y1 + $TILE_SIZE))
-      gifsicle --crop ${x1},${y1}-${x2},${y2} --output ./tiles/${zoom_level}_${x}_${y}.gif ./tiles/zoom${zoom_level}.gif
+      gifsicle --crop ${x1},${y1}-${x2},${y2} --crop-transparency --output ./tiles/${zoom_level}_${x}_${y}.gif \
+        ./tiles/zoom${zoom_level}.gif
 
       column=$(($column + 1))
     done
