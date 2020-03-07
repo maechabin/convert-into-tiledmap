@@ -40,7 +40,7 @@ do
 
   # タイル化
   convert ./tiles/zoom${zoom_level}.${image_extension} -crop ${TILE_SIZE}x${TILE_SIZE} -quality 95 +gravity -set filename:tile \
-  ./tiles/${zoom_level}_%[fx:page.x/${TILE_SIZE}]_%[fx:page.y/${TILE_SIZE}] %[filename:tile].${image_extension}
+    ./tiles/${zoom_level}_%[fx:page.x/${TILE_SIZE}]_%[fx:page.y/${TILE_SIZE}] %[filename:tile].${image_extension}
 
   rm ./tiles/zoom${zoom_level}.${image_extension}
   zoom_level=$(($zoom_level + 1))
